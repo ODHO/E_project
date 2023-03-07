@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="./img/ico.png">
+  <title>Admin_Panel</title>
+  <link rel="stylesheet" href="./vendor/bootstrap/scss/bootstrap.scss">
+  <link rel="stylesheet" href="./css/fontawesome/css/all.min.css">
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/flaticon/flaticon.css">
+  <link rel="stylesheet" href="css/flaticon_1/flaticon_1.css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link href="css/sb-admin-2.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/bootstrap.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/DT_bootstrap.css"> -->
+  <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+  <link rel="stylesheet" href="alert.css">
+
+
+  <script src="https://kit.fontawesome.com/6f7625b96d.js" crossorigin="anonymous"></script>
+
+
+</head>
+<style>
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .form-group input {
+    border-radius: 8px;
+    padding: 5px;
+    width: 100%;
+    border: none;
+    background-color: #DEDEDE;
+  }
+
+  .preview {
+    background: url(./img/QIUlPR.png) !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    display: inline-grid;
+    border-radius: 30px;
+    height: 217px;
+    /* padding: 10px; */
+    float: right;
+    background: #DEDEDE;
+    width: 100%;
+  }
+
+  .back-ground {
+    background-color: #DEDEDE;
+  }
+
+  th {
+    text-align: center;
+    padding: 10px;
+    background-color: black;
+    color: white;
+  }
+
+  td {
+    color: black;
+    text-align: center;
+    padding: 20px;
+  }
+
+  table {
+    box-shadow: 0px 0px 8px 1px #59595924;
+  }
+
+  table,
+  th,
+  td {
+    border: none;
+  }
+
+  .tr-edit {
+    text-align: center;
+    border: none;
+    border-radius: 30px;
+  }
+
+  .tr-edit th {
+    border-radius: 10px;
+  }
+
+  .tr-edit td {
+    font-size: 30px;
+    border: none;
+
+  }
+
+  .table-data td {
+    padding: 5px;
+    text-align: center;
+  }
+
+  .table-data td button {
+    margin-top: 10px;
+  }
+
+  .stnd-for-btn {
+    border: none;
+    background: none;
+    text-decoration: underline;
+    color: #EC5A26;
+  }
+</style>
+
+<body id="page-top">
+
+  <div id="wrapper" class="tabContainer">
+
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion buttonContainer" id="accordionSidebar">
+
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-icon">
+          <i class="fa fa-bars" id="sidebarToggle"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">
+          <img style="object-fit: cover;width: 40%;" src="img/kurdish.png" alt="">
+        </div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider mt-3">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link tab" href="#" onclick="showPanel(0,'')">
+          <i style="color: white;;" class="flaticon-048-home"></i>
+          <span>Dashboard</span></a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link tab" href="#" onclick="showPanel(1,'')">
+          <i style="color: white;;" class="flaticon-025-dashboard"></i>
+          <span>Categories</span></a>
+
+      </li>
+      <!-- Divider -->
+
+      <!-- Heading -->
+
+
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed tablink" href="#" onclick="openPage('query', this, '')">
+          <i style="color: white;" class="fas fa-user"></i>
+          <span>Jobs</span>
+        </a>
+        <!-- <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Utilities:</h6>
+            <a class="collapse-item" href="#">Colors</a>
+            <a class="collapse-item" href="#">Borders</a>
+            <a class="collapse-item" href="#">Animations</a>
+            <a class="collapse-item" href="#">Other</a>
+          </div>
+        </div> -->
+      </li>
+
+
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+
+      <!-- <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div> -->
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column dft">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search -->
+
+          <!-- <img class="logo" src="./img/logo1.png"> -->
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+            <!-- <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> -->
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                      aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+            <!-- Nav Item - Messages -->
+            <!-- <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-envelope fa-fw"></i>
+                Counter - Messages
+                <span class="badge badge-danger badge-counter">7</span>
+              </a>
+              Dropdown - Messages
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                  Message Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                    <div class="status-indicator bg-success"></div>
+                  </div>
+                  <div class="font-weight-bold">
+                    <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been
+                      having.</div>
+                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
+                    <div class="status-indicator"></div>
+                  </div>
+                  <div>
+                    <div class="text-truncate">I have the photos that you ordered last month, how would you like them
+                      sent to you?</div>
+                    <div class="small text-gray-500">Jae Chun · 1d</div>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
+                    <div class="status-indicator bg-warning"></div>
+                  </div>
+                  <div>
+                    <div class="text-truncate">Last month's report looks great, I am very happy with the progress so
+                      far, keep up the good work!</div>
+                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
+                    <div class="status-indicator bg-success"></div>
+                  </div>
+                  <div>
+                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people
+                      say this to all dogs, even if they aren't good...</div>
+                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+              </div>
+            </li> -->
+
+            <!-- <div class="topbar-divider d-none d-sm-block"></div> -->
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">WELCOME ADMIN</span>
+                <!-- <img class="img-profile rounded-circle" src="./img/download.jfif"> -->
+                <i class="fas fa-user text-dark"></i>
+              </a>
+              <!-- Dropdown - User Information -->
+              <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div> -->
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <div id="loader" style="
+        display: flex;
+        justify-content: space-around;
+    "></div>
+
+        <br><br>
+
+        <!-- Begin Page Content -->
+        <div class="container">
+          <div id="alert"></div>
+          <div class="tabPanel">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-800">Recent Jobs</h1>
+
+            </div>
+
+
+            <div class="row">
+
+              <!-- messages -->
+              <div class="col-xl-8 col-lg-6">
+                <div class="card shadow mb-4 w-500">
+                  <!-- Card Header - Dropdown -->
+                  <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-blck pl-3">Recent Jobs</h6>
+                    <!-- <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div> -->
+                  </div>
+                  <!-- Card Body -->
+                  <div class="card-body msg-h" id="recentJobs">
+
+
+                    <!-- <div class="col-lg-12">
+                        <div style="margin-top: 20px;">
+                         <div class="bg-black" style="border: 1px solid black;background-color: black;border-radius: 10px;padding: 5px;line-height: 5px;"> 
+                           <h3 style="color: #EC5A26;">Wordpress Developer</h3>
+                           <p style="color: white;">Company.com</p>
+                         </div>
+                        </div>
+                       </div> -->
+
+                  </div>
+                </div>
+              </div>
+              <!-- statistics Chart -->
+              <div class="col-xl-4 col-lg-6">
+                <div class="card shadow mb-4 w-500">
+                  <!-- Card Header - Dropdown -->
+                  <table class="tr-edit">
+                    <tr>
+                      <th>Total Jobs</th>
+                      <th>Total Categories</th>
+                    </tr>
+                    <tr>
+                      <td id="totalJobs">0</td>
+                      <td id="totalCategory">0</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+
+            </div>
+            <!--news-->
+
+
+          </div>
+          <div class="tabPanel">
+            <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-800">MAIN MENU</h1>
+             
+            </div> -->
+            <!--menu/navbar-->
+            <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+               
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav">
+                    <a class="nav-link active tab" aria-current="page" href="#" onclick="showPanel(2,'')">Active</a>
+                    <a class="nav-link tab" href="#" onclick="showPanel(3,'')">News</a>
+                    <a class="nav-link tab" href="#" onclick="showPanel(4,'')">Completed</a>
+                    <a class="nav-link tab" href="#" onclick="showPanel(5,'')">Cancelled</a>
+                  </div>
+                </div>
+              </div>
+            </nav> -->
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                  <h1 class="h3 mb-0 text-gray-800">Categories</h1>
+                </div>
+                <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group" style="margin-left: -15px;margin-bottom: 15px;">
+                  <input type="text" class="form-control  border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                      <i class="fas fa-search fa-sm"></i>
+                    </button>
+                  </div>
+                </div>
+              </form> -->
+                <div class="col-lg-12" style="display: flex;">
+                  <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+
+                      <div class="tb-responsive" style="padding: 25px;">
+
+                        <div class="col-lg-12" style="margin-bottom: 50px;">
+                          <i style="float: right;font-size: xx-large;" class="flaticon-381-plus"></i>
+
+                          <h2>Create New Category</h2>
+
+                        </div>
+                        <form id="form" enctype="multipart/form-data" style="display: flex;">
+
+                          <div class="col-lg-6">
+                            <div class="form-group">
+
+                              <label for="username">Name : <input class="name" type="text" name="title"
+                                  placeholder="name" id="username" /></label>
+
+                            </div>
+
+                            <div class="form-group">
+                              <label for="file">Upload :</label>
+                              <input style="background: none;" type="file" name="image" id="file">
+                            </div>
+                            <div class="col-lg-12" style="text-align: -webkit-center;margin-top: 20px;">
+                              <button class="btn btn-primary" style="text-align: -webkit-center;" type="button"
+                                onclick="generateCategory(this.form)">Submit</button>
+                            </div>
+                          </div>
+
+                          <div class="col-lg-6" style="text-align: center;">
+                            <!-- Plain Javascript Example -->
+                            <h5>preview</h5>
+                            <div class="preview">
+                              <div id="example1" style="text-align: -webkit-center;">
+
+                                <!--UserName goes here-->
+                                <p id="usernamep"> </p>
+                                <!--selected image goes here -->
+
+                                <img style="object-fit: contain;
+                                mix-blend-mode: darken;
+                                width: 60%;
+                                display: block;
+                                height: 40%;" src="./img/completed.png" id="image" width="150" height="auto">
+
+                                <span class="jsValue" style="color: rgb(0, 0, 0);font-size: large;"></span>
+                              </div>
+                            </div>
+
+
+                          </div>
+
+                        </form>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="panel-body">
+                      <div class="">
+
+
+
+                        <div class="table-responsive">
+
+                          <table class="table" id="editable-sample">
+                            <thead>
+                              <tr>
+                                <th>Image</th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>DELETE</th>
+                              </tr>
+                            </thead>
+                            <tbody id="categoryDetails">
+
+                            </tbody>
+                          </table>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--common-->
+
+
+
+
+          <div id="query" class="tabcontent">
+            <!--main menu-->
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                  <h1 class="h3 mb-0 text-gray-800">Jobs</h1>
+                </div>
+                <!-- <form class="mw-40 navbar-search" style="float: right;">
+           <div class="input-group" style="margin-left: -15px;margin-bottom: 15px;">
+             <input type="text" class="form-control  border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+             <div class="input-group-append">
+               <button class="btn btn-primary" type="button">
+                 <i class="fas fa-search fa-sm"></i>
+               </button>
+             </div>
+           </div>
+         </form> -->
+                <div class="col-lg-12" style="display: flex;">
+                  <div class="col-lg-4">
+                    <div class="card shadow mb-4">
+
+                      <div class="tb-responsive" style="padding: 25px;">
+
+                        <form method="post" enctype="multipart/form-data">
+
+                          <div style="margin-bottom: 20px;">
+                            <i style="float: right;font-size: xx-large;" class="flaticon-381-plus"></i>
+                            <h3>Create New Jobs</h3>
+                          </div>
+
+
+                          <div class="form-group">
+                            <label for="title">Title</label><br>
+                            <input type="text" name="title">
+                          </div>
+                          <div class="form-group" id="categorySelect">
+
+
+                          </div>
+                          <div class="form-group">
+                            <label for="title">Description</label><br>
+                            <input type="text" name="description">
+                          </div>
+                          <div class="form-group">
+                            <label for="title">Contact</label><br>
+                            <input type="text" name="contact">
+                          </div>
+                          <div class="form-group">
+                            <label for="title">Email</label><br>
+                            <input type="email" name="email">
+                          </div>
+                          <div class="form-group">
+                            <label for="title">Location</label><br>
+                            <input type="text" name="location">
+                          </div>
+                          <div class="form-group">
+                            <label for="file">Add Image</label>
+                            <input type="file" name="image" style="background: none;">
+                          </div><br>
+                          <div class="col-lg-12" style="text-align: -webkit-center;margin-top: 20px;">
+                            <button class="btn btn-primary" style="text-align: -webkit-center;" type="button"
+                              onclick="generateJobs(this.form)">Submit</button>
+                          </div>
+                          <div id="loader"></div>
+                        </form>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div class="panel-body">
+                      <div class="">
+
+
+
+                        <div class="table-responsive">
+                          <table class="table" id="editable-sample" style="height: 655px;
+                          width: 100%;
+                          margin-bottom: 1rem;
+                          color: #ffffff;
+                          display: table-caption;">
+                            <thead>
+                              <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Categories</th>
+                                <th>Description</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Location</th>
+                                <th>Date</th>
+                                <th>EDIT</th>
+                                <th>DELETE</th>
+                              </tr>
+                            </thead>
+                            <tbody id="jobsDetails">
+                            </tbody>
+                          </table>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">EDIT</h4><button type="button" class="close"
+                          data-dismiss="modal">×</button>
+
+                      </div>
+                      <div class="modal-body">
+                        <div class="col-lg-12">
+                          <div class="mb-4">
+
+                            <div class="tb-responsive" id="jobUpdate" style="padding: 25px;">
+
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="modal fade" id="myModal2" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">EDIT</h4><button type="button" class="close"
+                          data-dismiss="modal">×</button>
+
+                      </div>
+                      <div class="modal-body">
+                        <div class="col-lg-12">
+                          <div class="mb-4">
+
+                            <div class="tb-responsive" id="jobUpdate" style="padding: 25px;">
+
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+        <span>&copy; 2022 COPYRIGHT POWERED BY KHURDISH JOBS</span>
+      </div>
+    </div>
+  </footer>
+  <!-- End of Footer -->
+
+
+  <!-- End of Content Wrapper -->
+
+
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="index.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="logoutModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Shipping Details</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" placeholder="Title"> <br>
+          <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Product Description"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Upload Image</button>
+          <a class="btn btn-primary" href="login.html">Save</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+  </script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+    integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous">
+  </script>
+
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-area-demo.js"></script>
+  <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="./js/tabs.js"></script>
+  <script src="./js/demo/btn.js"></script>
+  <script src="./js/myScript.js"></script>
+  <script src="./js/gallery.js"></script>
+  <script>
+    jQuery(document).ready(function () {
+      EditableTable.init();
+    });
+  </script>
+  <script>
+    function on() {
+      if (document.getElementById("On").style.display = "none") {
+        document.getElementById("On").style.display = "block"
+        document.getElementById("Off").style.display = "none"
+      } else {
+        document.getElementById("Off").style.display = "none"
+      }
+    }
+  </script>
+  <script>
+    $(document).ready(function () {
+      $('select').change(function () {
+        $('select option')[0].value = $('select option:selected').val();
+        $('select option')[0].innerHTML = $('select option:selected').val();
+        $("select").val($('select option:selected').val());
+
+        console.log($('select option:selected').val());
+      });
+    });
+  </script>
+  <script>
+    const form = document.querySelector('#form')
+    const tagImage = document.querySelector('#image')
+    const inputFile = document.querySelector('#file')
+
+    function renderImage(formData) {
+      const file = formData.get('image')
+      const image = URL.createObjectURL(file)
+      tagImage.setAttribute('src', image)
+    }
+
+    const userNameP = document.querySelector('#username')
+
+    function renderName(formData) {
+      const username = formData.get('username')
+      userNameP.textContent = username
+    }
+    //para poder trocar a imagem antes de enviar
+    inputFile.addEventListener('change', () => {
+      const formData = new FormData(form)
+      renderImage(formData)
+    })
+
+    form.addEventListener('submit', event => {
+      event.preventDefault()
+      const formData = new FormData(event.currentTarget)
+      renderName(formData)
+      //renderImage(formData) //visuzliza apenas depois de enviado
+    })
+
+
+
+    // https://www.youtube.com/watch?v=j8X_BP9Y5VA
+  </script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/jquery.js"></script>
+
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/jquery-ui-1.9.2.custom.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/jquery.nicescroll.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/bootstrap.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/jquery.dataTables.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/DT_bootstrap.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/jquery-migrate-1.2.1.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/respond.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/184766/editable-table.js"></script>
+
+  <script src="classes.js?v=13"></script>
+  <script>
+    // Plain Javascript Example
+    var $jsName = document.querySelector('.name');
+    var $jsValue = document.querySelector('.jsValue');
+
+    $jsName.addEventListener('input', function (event) {
+      $jsValue.innerHTML = $jsName.value;
+    }, false);
+
+
+    // JQuery example
+    var $jqName = $('.name');
+    var $jqValue = $('.jqValue');
+
+    $jqName.on('input', function (event) {
+      $jqValue.html($jqName.val());
+    });
+
+    var newURL = window.location.href;
+  </script>
+  <script>
+    $(document).ready(function () {
+
+      logged()
+
+      Promise.all([
+        categoryDetails(),
+        jobsDetails()
+      ])
+    })
+
+
+    function logged() {
+
+      if (localStorage.getItem("loggedUser") == null) {
+        location.replace("index.html")
+      }
+
+    }
+
+
+    async function removeCategory(row, categoryid) {
+
+      const data = {
+        id: categoryid
+      }
+
+      const categoryDelete = new ApiService('category/delete');
+      const response = await categoryDelete.Post(data)
+
+
+      if (response.success) {
+
+        $(row).closest('tr').remove()
+
+        categoryDetails()
+
+        $('#alert').html(
+          "<div class='alert success' style='width: 100%;'><span class='closebtn'>&times;</span>Data Removed! </div>"
+        )
+
+
+      } else {
+
+        $('#alert').html(
+          "<div class='alert danger' style='width: 100%;'><span class='closebtn'>&times;</span>Process Not Completed! Try Again Later. </div>"
+        )
+
+      }
+
+    }
+
+
+    function addCategoryRow(data) {
+
+      return '<tr><td><img style="object-fit: cover;width: 50%;" src="https://khurdishjobs.com/uploads/' + data
+        .icon +
+        '" alt=""></td><td>' + data.id +
+        '</td><td>' + data.title +
+        '</td><td>' + " <button class='btn btn-primary btn-user btn-block' onclick='removeCategory(this, " +
+        data.id + ")' >DELETE</button></td></tr>"
+
+    }
+
+
+
+
+    async function categoryDetails() {
+
+      const categoryDetails = new ApiService('category');
+      const response = await categoryDetails.Get()
+
+      let totalCategory = ""
+      let totCategoryRows = 0
+      let categoryOption = `<label for="title">Category</label><br>
+        <select name="category" id="categorySelect">`
+
+      if (response.success) {
+
+        response.data.map(item => {
+          totalCategory = totalCategory + addCategoryRow(item)
+          categoryOption = categoryOption + `<option value='` + item.title + `'>` + item.title + `</option>`
+          totCategoryRows++
+        })
+
+        categoryOption = categoryOption + `</select>`
+
+        $('#categorySelect').html(categoryOption)
+        $('#totalCategory').html(response.data.length)
+        $('#categoryDetails').html(totalCategory)
+
+      } else {
+
+
+        $('#alert').html(
+          "<div class='alert danger'><span class='closebtn'>&times;</span>No Data</div>"
+        )
+
+      }
+
+    }
+
+
+
+    async function generateCategory(form) {
+
+      $('#loader').html(`<i class="fa-solid fa-spinner fa-spin-pulse" style="
+color: black;
+"></i>`)
+
+      var title = form.title.value;
+      var image = form.image.value;
+
+
+      if (title && image) {
+
+        const formData = new FormData(form);
+
+        if (formData.get("image").type == "image/jpeg") {
+
+          const createCategory = new ApiService('category');
+          const response = await createCategory.formDataPost(formData)
+
+          if (response.success) {
+
+            $('#loader').children().remove()
+
+            categoryDetails()
+
+
+            $('#alert').html(
+              "<div class='alert success'><span class='closebtn'>&times;</span>Category Successfully Added!</div>"
+            )
+
+          } else {
+
+
+            $('#loader').children().remove()
+
+            $('#alert').html(
+              "<div class='alert danger'><span class='closebtn'>&times;</span>Error Occured! Try Again Later.</div>"
+            )
+
+          }
+
+        } else {
+
+          $('#loader').children().remove()
+
+          $('#alert').html(
+            "<div class='alert warning'><span class='closebtn'>&times;</span>Only JPG File Type Supported !</div>"
+          )
+
+        }
+
+
+      } else {
+
+        $('#loader').children().remove()
+
+        $('#alert').html(
+          "<div class='alert info'><span class='closebtn'>&times;</span>Empty Field(s)!</div>"
+        )
+
+      }
+
+    }
+
+
+
+
+    async function updateJobs(form, data) {
+
+
+      // let jobdata = JSON.parse(data)
+
+      const formData = new FormData(form);
+
+      formData.append("date", new Date().toLocaleDateString('en-CA'))
+      formData.append("id", data.id)
+
+
+      if (formData.get("image").type == "image/jpeg" || formData.get("image").size == 0) {
+
+        const jobUpdate = new ApiService('jobs');
+        const response = await jobUpdate.UpdateById(formData)
+
+
+
+        if (response.success) {
+
+          $('#loader').children().remove()
+
+          jobsDetails()
+
+          $('#alert').html(
+            "<div class='alert success'><span class='closebtn'>&times;</span>Job Successfully Updated!</div>"
+          )
+
+        } else {
+
+
+          $('#loader').children().remove()
+
+          $('#alert').html(
+            "<div class='alert danger'><span class='closebtn'>&times;</span>Error Occured! Try Again Later.</div>"
+          )
+
+        }
+
+      } else {
+
+        $('#loader').children().remove()
+
+        $('#alert').html(
+          "<div class='alert warning'><span class='closebtn'>&times;</span>Only JPG File Type Supported !</div>"
+        )
+
+      }
+
+    }
+
+
+    async function edit(params) {
+
+      let data = JSON.parse(params)
+
+      let modalForm = `<form method="post" enctype="multipart/form-data">
+
+        <div style="margin-bottom: 20px;">
+          <i style="float: right;font-size: xx-large;" class="flaticon-381-plus"></i>
+          <h3>Update Job</h3>
+        </div>
+
+
+        <div class="form-group">
+          <label for="title">Title</label><br>
+          <input type="text" name="title" value="` + data.title + `">
+        </div>
+        <div class="form-group">
+          <label for="title">Category</label><br>
+          <input type="text" name="category" value="` + data.category + `">
+        </div>
+        <div class="form-group">
+          <label for="title">Description</label><br>
+          <input type="text" name="description" value="` + data.description + `">
+        </div>
+        <div class="form-group">
+          <label for="title">Contact</label><br>
+          <input type="text" name="contact" value="` + data.contact + `">
+        </div>
+        <div class="form-group">
+          <label for="title">Email</label><br>
+          <input type="email" name="email" value="` + data.email + `">
+        </div>
+        <div class="form-group">
+          <label for="title">Location</label><br>
+          <input type="text" name="location" value="` + data.location +
+        `">
+        </div>
+        <div class="form-group">
+          <label for="file">Add Image</label>
+          <input type="file" name="image" style="background: none;" >
+        </div><br>
+        <div class="col-lg-12" style="text-align: -webkit-center;margin-top: 20px;">  
+          <button class="btn btn-primary" style="text-align: -webkit-center;" type="button"  onclick='updateJobs(this.form, ` +
+        JSON.stringify(data) + `)'>Save</button>
+        </div>
+        </form>`
+
+      $("#jobUpdate").html(modalForm)
+
+    }
+
+
+    async function remove(row, jobid) {
+
+      const data = {
+        id: jobid
+      }
+      const jobsDelete = new ApiService('jobs/delete');
+      const response = await jobsDelete.Post(data)
+
+      if (response.success) {
+
+        $(row).closest('tr').remove()
+
+        jobsDetails()
+
+        $('#alert').html(
+          "<div class='alert success' style='width: 100%;'><span class='closebtn'>&times;</span>Data Removed! </div>"
+        )
+
+
+      } else {
+
+        $('#alert').html(
+          "<div class='alert danger' style='width: 100%;'><span class='closebtn'>&times;</span>Process Not Completed! Try Again Later. </div>"
+        )
+
+      }
+
+    }
+
+
+    function addRow(data) {
+
+      return '<tr><td><img style="object-fit: cover;width: 50%;" src="https://khurdishjobs.com/uploads/' + data
+        .image +
+        '" alt=""></td><td>' + data.title +
+        '</td><td>' + data.category +
+        '</td><td>' + data.description +
+        '</td><td>' + data.contact +
+        '</td><td>' + data.email +
+        '</td><td>' + data.location +
+        '</td><td>' + new Date(data.date).toLocaleDateString('en-CA') +
+        '</td><td>' +
+        " <button data-toggle='modal' data-target='#myModal' class='btn btn-primary btn-user btn-block'  value='" +
+        JSON.stringify(data) +
+        "' onclick='edit(this.value)' >EDIT</button></td><td><button class='btn btn-primary btn-user btn-block' onclick='remove(this, " +
+        data.id + ")' >DELETE</button></td></tr>"
+
+    }
+
+
+
+    async function jobsDetails() {
+
+      const jobs = new ApiService('jobs');
+      const response = await jobs.Get()
+
+      let totalJobs = ""
+      let totRows = 0
+      let recents = ""
+
+
+      if (response.success) {
+
+        response.data.map(item => {
+
+          totalJobs = totalJobs + addRow(item)
+
+          let dateobj = new Date(item.date)
+
+          let date = (dateobj.getMonth() + 1) + "/" + (dateobj.getDate() + 1) + "/" + dateobj.getFullYear()
+          let today = new Date().toLocaleDateString()
+
+          if (date == today) {
+
+            recents = recents + `<div class="col-lg-12">
+                    <div style="margin-top: 20px;">
+                      <div class="bg-black"
+                        style="border: 1px solid black;background-color: black;border-radius: 10px;padding: 5px;line-height: 5px;">
+                        <h3 style="color: #EC5A26;">` + item.title + `</h3>
+                        <p style="color: white;">` + item.category + `</p>
+                      </div>
+                    </div>
+                  </div>`
+
+          }
+
+          totRows++
+
+        })
+
+
+        if (recents == "") {
+
+          $('#recentJobs').html(`<div class="col-lg-12">
+        <div style="margin-top: 20px;">
+          <div class="bg-black"
+            style="border: 1px solid black;background-color: black;border-radius: 10px;padding: 5px;line-height: 5px;">
+            <h3 style="color: #EC5A26;">No Recent Jobs</h3>
+          </div>
+        </div>
+      </div>`)
+
+        } else {
+
+          $('#recentJobs').html(recents)
+
+        }
+
+
+        $("#totalJobs").html(response.data.length)
+
+        $('#jobsDetails').html(totalJobs)
+
+      } else {
+
+        $('#alert').html(
+          "<div class='alert danger'><span class='closebtn'>&times;</span>No Data</div>"
+        )
+
+      }
+
+    }
+
+    async function generateJobs(form) {
+
+      $('#loader').html(`<i class="fa-solid fa-spinner fa-spin-pulse" style="
+    color: white;
+"></i>`)
+
+      var title = form.title.value;
+      var category = form.category.value;
+      var description = form.description.value;
+      var contact = form.contact.value;
+      var email = form.email.value;
+      var location = form.location.value;
+
+
+      if (title && category && description && contact && email && location) {
+
+        const formData = new FormData(form);
+
+        formData.append("date", new Date().toLocaleDateString('en-CA'))
+
+
+        if (formData.get("image").type == "image/jpeg" || formData.get("image").size == 0) {
+
+          const createJobs = new ApiService('jobs');
+          const response = await createJobs.formDataPost(formData)
+
+
+          if (response.success) {
+
+            $('#loader').children().remove()
+
+            jobsDetails()
+
+            $('#alert').html(
+              "<div class='alert success'><span class='closebtn'>&times;</span>Job Successfully Added!</div>"
+            )
+
+          } else {
+
+
+            $('#loader').children().remove()
+
+            $('#alert').html(
+              "<div class='alert danger'><span class='closebtn'>&times;</span>Error Occured! Try Again Later.</div>"
+            )
+
+          }
+
+        } else {
+
+          $('#loader').children().remove()
+
+          $('#alert').html(
+            "<div class='alert warning'><span class='closebtn'>&times;</span>Only JPG File Type Supported !</div>"
+          )
+
+        }
+
+
+      } else {
+
+        $('#loader').children().remove()
+
+        $('#alert').html(
+          "<div class='alert info'><span class='closebtn'>&times;</span>Empty Field(s)!</div>"
+        )
+
+      }
+
+    }
+
+
+
+    $('#alert').on('click', '.closebtn', function () {
+
+      $('.alert').remove()
+
+    })
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin_Panel-Login</title>
+  <link rel="stylesheet" href="./vendor/bootstrap/scss/bootstrap.scss">
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.css" rel="stylesheet">
+  <link rel="stylesheet" href="alert.css">
+
+  <script src="https://kit.fontawesome.com/6f7625b96d.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body style="background-color: #fff !important;">
+
+  <div class="container">
+
+    <div id="alert"></div>
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg c2">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                <div class="b-content">
+
+                  <h1 class="head1">
+                    WELCOME TO
+
+                    <span style="font-size: 30px;"> KHURDISH JOBS</span>
+                  </h1>
+                  <div class="border2"></div>
+
+                </div>
+              </div>
+              <div class="col-lg-6" style="background-color: #EDEDED;">
+                <div class="text-center">
+                  <div class="img-bord">
+                    <img class="imglog" src="./img/logo1.png">
+                  </div>
+                </div>
+                <div class="p-3">
+                  <div class="text-center">
+                    <h1 class="h4 text-dark mb-4">ADMIN LOGIN</h1>
+                  </div>
+                  <form class="user">
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
+                        aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="password" class="form-control form-control-user"
+                        id="exampleInputPassword" placeholder="Password">
+                    </div>
+                    <!-- <div class="form-group">
+                      <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <label class="custom-control-label" for="customCheck">Keep me signed in</label>
+                      </div>
+                    </div> -->
+
+                    <button type="button" class="btn btn-primary btn-user btn-block" onclick="loginSubmit(this.form)">
+                      LOGIN IN </button>
+                      <br>
+                    <div id="loader" style="
+                    display: flex;
+                    justify-content: space-around;
+                ">
+                    </div>
+                  </form>
+                  <hr>
+
+                  <div class="text-center">
+                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+  <script src="classes.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      logged()
+    })
+
+
+    function logged() {
+
+      if (localStorage.getItem("loggedUser")) {
+        location.replace("admin.html")
+      }
+
+    }
+
+
+
+    async function loginSubmit(form) {
+
+      $('#loader').html(`<i class="fa-solid fa-spinner fa-spin-pulse" style="
+      color: black;
+      "></i>`)
+
+      var email = form.email.value;
+      var password = form.password.value;
+
+      if (email && password) {
+
+
+        const admin = new ApiService('users');
+        const response = await admin.Get()
+
+        if (response.success) {
+
+          if (response.data[0].useremail == email && response.data[0].password == password) {
+
+
+            $('#alert').html(
+              "<div class='alert success'><span class='closebtn'>&times;</span>Login Successfull! </div>"
+            )
+
+            localStorage.setItem('loggedUser', JSON.stringify(response.data))
+
+            setTimeout(function () {
+              location.replace('admin.html')
+            }, 3000)
+
+            $('#loader').children().remove()
+
+
+          } else {
+
+            $('#loader').children().remove()
+
+
+            $('#alert').html(
+              "<div class='alert danger'><span class='closebtn'>&times;</span>Credentials Not Matched!</div>")
+
+          }
+
+
+        } else {
+
+          $('#loader').children().remove()
+
+
+          $('#alert').html(
+            "<div class='alert danger'><span class='closebtn'>&times;</span>Error Occured! Please Try Again.</div>")
+
+        }
+
+      } else {
+
+        $('#loader').children().remove()
+
+        $('#alert').html(
+          "<div class='alert info'><span class='closebtn'>&times;</span>Empty Field(s) Detected!</div>")
+
+      }
+
+
+
+    }
+
+    $('#alert').on('click', '.closebtn', function () {
+
+      $('.alert').remove()
+
+    })
+  </script>
+
+</body>
+
+</html>
